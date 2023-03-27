@@ -21,6 +21,9 @@ def home():
 def shorten_url():
     url = request.json['url']
     short_id = str(uuid.uuid4())[:7]
+    # TODO: this doesn't handle collisions
+    if collection.finding_one({'_id': short_id}):
+        return jsonify({'error': 'Something went wrong'})
     short_url = f"{os.environ['BASE_URL']}/{short_id}"
     collection.insert_one({'_id': short_id, 'url': url})
     return jsonify({'short_url': short_url})
