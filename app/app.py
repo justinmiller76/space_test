@@ -1,10 +1,7 @@
 from flask import Flask, jsonify, request, redirect
 import uuid
 import os
-from dotenv import load_dotenv
 from pymongo import MongoClient
-
-load_dotenv()
 
 app = Flask(__name__)
 client = MongoClient(os.environ['MONGODB_URI'])
